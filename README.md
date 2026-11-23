@@ -28,6 +28,15 @@ with a `!` in front. Part 2 runs fine on a laptop CPU; for Part 3 we recommend a
 | `data.py` | `channel_stats`, `ImageDataset`, and `image_loaders` for classification; `CaptionDataset`, `PadCollate`, and `caption_loaders` for captioning, which take *your* `encode` function (caption string to token ids) and the id of your padding token. |
 | `train.py` | `train(...)`: a training loop with optional learning-rate scheduler, gradient clipping, early stopping, and restoring the best epoch on the validation set; you pass it your `loss_fn` and `val_score_fn`. Also `set_seed`, `count_parameters`, `get_device`. |
 | `metrics.py` | `accuracy`, `confusion_matrix`, `per_class_accuracy`; `bleu4`, `class_mention_accuracy` (with the synonym list `CLASS_SYNONYMS`), `distinct_ngrams`. |
+| `common.py` | Shared classification protocol (training, evaluation) and result formatting. |
+| `models.py` | Configurable MLP (`hidden_sizes=()` gives the linear model). |
+| `q2_2_mlp.py` | MLP selection, learning curves and comparison with the baseline when Q2.1 results are available. |
+
+## Reproducing the results
+
+| Question | Command | Approximate CPU time | Default seeds |
+|---|---|---|---|
+| Q2.2 | `python q2_2_mlp.py` | 30 min, or 5 min with the supplied `results/q2_2/runs/` cache | 0, 1, 2 |
 
 ## Example
 

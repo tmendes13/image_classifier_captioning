@@ -1,0 +1,15 @@
+{
+  "hidden_sizes": [
+    512,
+    512
+  ],
+  "activation": "relu",
+  "dropout": 0.5,
+  "optimizer": "adam",
+  "lr": 0.0003,
+  "weight_decay": 0.0,
+  "schedule": "constant",
+  "batch_size": 64,
+  "epochs": 30,
+  "patience": 6
+}
