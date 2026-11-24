@@ -31,12 +31,28 @@ with a `!` in front. Part 2 runs fine on a laptop CPU; for Part 3 we recommend a
 | `common.py` | Shared classification protocol (training, evaluation) and result formatting. |
 | `models.py` | Configurable MLP (`hidden_sizes=()` gives the linear model). |
 | `q2_2_mlp.py` | MLP selection, learning curves and comparison with the baseline when Q2.1 results are available. |
+| `q2_3_study.py` | Controlled depth, width and dropout study around the selected Q2.2 MLP. |
+| `q2_3_report.py` | Q2.3 comparison and per-class tables, learning curves and confusion matrix. |
 
 ## Reproducing the results
 
 | Question | Command | Approximate CPU time | Default seeds |
 |---|---|---|---|
 | Q2.2 | `python q2_2_mlp.py` | 30 min, or 5 min with the supplied `results/q2_2/runs/` cache | 0, 1, 2 |
+| Q2.3 | `python q2_3_study.py` | About 35 min | 0, 1, 2 |
+
+Q2.3 reads `results/q2_2/best_config.json` and compares the reference with three
+one-factor changes: one fewer hidden layer, half the hidden width, and dropout
+disabled. All runs use 30 full epochs without early stopping; each run restores
+its best-validation checkpoint. Only the configuration with the highest mean
+validation accuracy is evaluated on test. All statistics use PyTorch.
+
+Q2.3 writes only `results/q2_3/results.json`, `table_ablation.tex`,
+`table_per_class.tex`, `curves.png`, and `confusion_matrix.png`. The JSON contains
+the configuration, seeds, training histories and numerical results. To regenerate
+the tables and figures without training, run `python q2_3_study.py --report-only`.
+Use `--data-root PATH` if the dataset is stored elsewhere. Model weights are held
+temporarily during training and removed automatically afterwards.
 
 ## Example
 
