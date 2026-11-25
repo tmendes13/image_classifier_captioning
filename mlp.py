@@ -5,9 +5,10 @@ from data import image_loaders, channel_stats
 from load_data import load_coco_dominant10
 
 class LinearClassifier(nn.Module):
-    def init(self, n_inputs=36464, n_classes=10):
-        super().init()
+    def __init__(self, n_inputs=12288, n_classes=10):
+        super().__init__()
         self.layer = nn.Linear(n_inputs, n_classes)
+
     def forward(self, x):
         return self.layer(x.flatten(1))
 
